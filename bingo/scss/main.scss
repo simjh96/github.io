@@ -12,8 +12,8 @@ svg {
 
 .contentWrap {
   margin: auto;
-  width: 70vh;
-  height: 70vh;
+  width: 80vh;
+  height: 80vh;
   display: flex;
   position: relative;
   flex-flow: column;
@@ -51,7 +51,10 @@ svg {
     }
     &.selected {
       background-color: none;
-      background: linear-gradient(rgba(136, 6, 6, 0.884), rgba(54, 2, 2, 0.856));
+      background: linear-gradient(
+        rgba(136, 6, 6, 0.884),
+        rgba(54, 2, 2, 0.856)
+      );
     }
   }
 }

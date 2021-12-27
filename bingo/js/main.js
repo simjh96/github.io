@@ -61,14 +61,29 @@ const select = function () {
 };
 
 const match = function (ori_cord, comp_cord) {
-  $(`[data-cord="${ori_cord[0]},${ori_cord[1]}"]`).find("span")[0].textContent == $(`[data-cord="${comp_cord[0]},${comp_cord[1]}"]`).find("span")[0].textContent;
+  $(`[data-cord="${ori_cord[0]},${ori_cord[1]}"]`).find("span")[0]
+    .textContent ==
+    $(`[data-cord="${comp_cord[0]},${comp_cord[1]}"]`).find("span")[0]
+      .textContent;
 };
 
-const dfs = function (r_cord, d_cord, record, answer, size, turns = 0, dirc = [0, 0], debug = 0) {
+const dfs = function (
+  r_cord,
+  d_cord,
+  record,
+  answer,
+  size,
+  turns = 0,
+  dirc = [0, 0],
+  debug = 0
+) {
   // void: assigned at answer[0]
   if (turns < 4) {
     console.log(" ".repeat(debug) + "=======================");
-    console.log(" ".repeat(debug) + `r_cord:${r_cord}, d_cord:${d_cord}, record:${record}, turns:${turns}, dirc:${dirc}`);
+    console.log(
+      " ".repeat(debug) +
+        `r_cord:${r_cord}, d_cord:${d_cord}, record:${record}, turns:${turns}, dirc:${dirc}`
+    );
     let root = $(`[data-cord="${r_cord[0]},${r_cord[1]}"]`);
 
     if (dirc.some((x) => x) && root.hasClass("block")) {
@@ -87,11 +102,24 @@ const dfs = function (r_cord, d_cord, record, answer, size, turns = 0, dirc = [0
       ];
       for (let i = 0; i < dircs.length; i++) {
         const _dirc = dircs[i];
-        if (r_cord[0] + _dirc[0] in [...Array(size[0] + 2).keys()] && r_cord[1] + _dirc[1] in [...Array(size[1] + 2).keys()] && _dirc.some((v, i, arr) => v + dirc[i])) {
+        if (
+          r_cord[0] + _dirc[0] in [...Array(size[0] + 2).keys()] &&
+          r_cord[1] + _dirc[1] in [...Array(size[1] + 2).keys()] &&
+          _dirc.some((v, i, arr) => v + dirc[i])
+        ) {
           let _r_cord = r_cord.map((v, i) => v + _dirc[i]);
           console.log(" ".repeat(debug) + "===in range=== && ===in dirc===");
           console.log(" ".repeat(debug) + `_r_cord : ${_r_cord}`);
-          dfs(_r_cord, d_cord, record.concat([_r_cord]), answer, size, turns + !dirc.every((v, i) => v == _dirc[i]), _dirc, debug + 1);
+          dfs(
+            _r_cord,
+            d_cord,
+            record.concat([_r_cord]),
+            answer,
+            size,
+            turns + !dirc.every((v, i) => v == _dirc[i]),
+            _dirc,
+            debug + 1
+          );
         }
       }
     }
@@ -145,12 +173,21 @@ const addListener = function (cord, size) {
       select.bind(this)();
       let selected = $(".selected");
       if (selected.length == 2) {
-        if (selected.find("span")[0].textContent == selected.find("span")[1].textContent) {
+        if (
+          selected.find("span")[0].textContent ==
+          selected.find("span")[1].textContent
+        ) {
           let answer = [];
           let root = $(selected[0]);
           let dest = $(selected[1]);
-          let r_cord = [/(\d+),\d+/.exec(root.data("cord"))[1], /\d+,(\d+)/.exec(root.data("cord"))[1]].map((x) => Number(x)); // 이거 한자리만 받아오네.. 10개 넘으면 팅김... regex로 대체하자
-          let d_cord = [/(\d+),\d+/.exec(dest.data("cord"))[1], /\d+,(\d+)/.exec(dest.data("cord"))[1]].map((x) => Number(x));
+          let r_cord = [
+            /(\d+),\d+/.exec(root.data("cord"))[1],
+            /\d+,(\d+)/.exec(root.data("cord"))[1],
+          ].map((x) => Number(x)); // 이거 한자리만 받아오네.. 10개 넘으면 팅김... regex로 대체하자
+          let d_cord = [
+            /(\d+),\d+/.exec(dest.data("cord"))[1],
+            /\d+,(\d+)/.exec(dest.data("cord"))[1],
+          ].map((x) => Number(x));
 
           dfs(r_cord, d_cord, [r_cord], answer, size);
 
@@ -164,18 +201,56 @@ const addListener = function (cord, size) {
               "line",
               0.05,
               { x: -1 },
-              { x: 1, ease: RoughEase.ease.config({ strength: 8, points: 20, template: Linear.easeNone, randomize: false }), clearProps: "x", onComplete: () => $("line").remove() }
+              {
+                x: 1,
+                ease: RoughEase.ease.config({
+                  strength: 8,
+                  points: 20,
+                  template: Linear.easeNone,
+                  randomize: false,
+                }),
+                clearProps: "x",
+                onComplete: () => $("line").remove(),
+              }
             );
 
             selected.removeClass("block");
           } else {
             // no path
-            gsap.fromTo(selected, 0.05, { rotateY: -10 }, { rotateY: 10, ease: RoughEase.ease.config({ strength: 8, points: 20, template: Linear.easeNone, randomize: false }), clearProps: "x" });
+            gsap.fromTo(
+              selected,
+              0.05,
+              { rotateY: -10 },
+              {
+                rotateY: 10,
+                ease: RoughEase.ease.config({
+                  strength: 8,
+                  points: 20,
+                  template: Linear.easeNone,
+                  randomize: false,
+                }),
+                clearProps: "x",
+              }
+            );
             selected.removeClass("selected");
           }
         } else {
           // totally wrong
-          gsap.fromTo(selected, 0.05, { rotateX: -15 }, { rotateX: 15, ease: RoughEase.ease.config({ strength: 8, points: 20, template: Linear.easeNone, randomize: false }), clearProps: "x" });
+          gsap.fromTo(
+            selected,
+            0.05,
+            { rotateX: -15 },
+            {
+              rotateX: 15,
+              ease: RoughEase.ease.config({
+                strength: 8,
+                points: 20,
+                template: Linear.easeNone,
+                randomize: false,
+              }),
+              clearProps: "x",
+            }
+          );
           selected.removeClass("selected");
         }
       }
@@ -228,7 +303,11 @@ const genBoard = function (s_row, s_col) {
   console.log(`idxs:${idxs}`);
   for (let i = 0; i < idxs.length; i++) {
     let idx = idxs[i];
-    console.log(`trabelable : ${[...Array([s_row, s_col][0] + 2).keys()]}, ${[...Array([s_row, s_col][1] + 2).keys()]}`);
+    console.log(
+      `trabelable : ${[...Array([s_row, s_col][0] + 2).keys()]}, ${[
+        ...Array([s_row, s_col][1] + 2).keys(),
+      ]}`
+    );
     putIcon(idx[0], i);
     putIcon(idx[1], i);
     addListener(idx[0], [s_row, s_col]);
@@ -237,4 +316,4 @@ const genBoard = function (s_row, s_col) {
   gsap.from(".tile", 0.1, { x: -1000, y: -1000, z: 100, stagger: 0.01 });
 };
 
-genBoard(4, 12);
+genBoard(4, 15);
