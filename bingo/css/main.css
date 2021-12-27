@@ -1,0 +1,76 @@
+svg {
+  position: absolute;
+  top: 0;
+  width: 70vh;
+  height: 70vh;
+  pointer-events: none;
+}
+
+.contentWrap {
+  margin: auto;
+  width: 70vh;
+  height: 70vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+}
+
+.row {
+  height: 95%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.row .sizeFixer {
+  width: 100%;
+  height: 100%;
+}
+
+.row .tile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 80%;
+  height: 90%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.row .tile.hide {
+  display: none;
+}
+
+.row .tile.block {
+  border: 3px solid rgba(165, 42, 42, 0.89);
+  -webkit-box-shadow: 1px 1px 3px rgba(124, 32, 32, 0.89);
+          box-shadow: 1px 1px 3px rgba(124, 32, 32, 0.89);
+  background: -webkit-gradient(linear, left top, left bottom, from(#9b7b7b));
+  background: linear-gradient(#9b7b7b);
+}
+
+.row .tile.block:hover {
+  -webkit-transform: scale(101%);
+          transform: scale(101%);
+  border: 3px solid rgba(165, 147, 42, 0.89);
+  -webkit-box-shadow: 1px 1px 3px rgba(124, 111, 32, 0.89);
+          box-shadow: 1px 1px 3px rgba(124, 111, 32, 0.89);
+}
+
+.row .tile.selected {
+  background-color: none;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(136, 6, 6, 0.884)), to(rgba(54, 2, 2, 0.856)));
+  background: linear-gradient(rgba(136, 6, 6, 0.884), rgba(54, 2, 2, 0.856));
+}
