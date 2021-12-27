@@ -79,18 +79,18 @@ const dfs = function (
 ) {
   // void: assigned at answer[0]
   if (turns < 4) {
-    console.log(" ".repeat(debug) + "=======================");
-    console.log(
-      " ".repeat(debug) +
-        `r_cord:${r_cord}, d_cord:${d_cord}, record:${record}, turns:${turns}, dirc:${dirc}`
-    );
+    // console.log(" ".repeat(debug) + "=======================");
+    // console.log(
+    //   " ".repeat(debug) +
+    //     `r_cord:${r_cord}, d_cord:${d_cord}, record:${record}, turns:${turns}, dirc:${dirc}`
+    // );
     let root = $(`[data-cord="${r_cord[0]},${r_cord[1]}"]`);
 
     if (dirc.some((x) => x) && root.hasClass("block")) {
-      console.log(" ".repeat(debug) + "===is block===");
+      // console.log(" ".repeat(debug) + "===is block===");
       if (r_cord.every((v, i) => v == d_cord[i])) {
-        console.log(" ".repeat(debug) + "===is path===");
-        console.log(" ".repeat(debug) + record);
+        // console.log(" ".repeat(debug) + "===is path===");
+        // console.log(" ".repeat(debug) + record);
         answer[0] = record;
       }
     } else {
@@ -108,8 +108,8 @@ const dfs = function (
           _dirc.some((v, i, arr) => v + dirc[i])
         ) {
           let _r_cord = r_cord.map((v, i) => v + _dirc[i]);
-          console.log(" ".repeat(debug) + "===in range=== && ===in dirc===");
-          console.log(" ".repeat(debug) + `_r_cord : ${_r_cord}`);
+          // console.log(" ".repeat(debug) + "===in range=== && ===in dirc===");
+          // console.log(" ".repeat(debug) + `_r_cord : ${_r_cord}`);
           dfs(
             _r_cord,
             d_cord,
@@ -124,6 +124,24 @@ const dfs = function (
       }
     }
   }
+};
+
+const getPath = function (dom1, dom2, size) {
+  // ($('.selected')[0], $('.selected')[1], size) -> dfs path
+  let answer = [];
+  let root = $(dom1);
+  let dest = $(dom2);
+  let r_cord = [
+    /(\d+),\d+/.exec(root.data("cord"))[1],
+    /\d+,(\d+)/.exec(root.data("cord"))[1],
+  ].map((x) => Number(x));
+  let d_cord = [
+    /(\d+),\d+/.exec(dest.data("cord"))[1],
+    /\d+,(\d+)/.exec(dest.data("cord"))[1],
+  ].map((x) => Number(x));
+
+  dfs(r_cord, d_cord, [r_cord], answer, size);
+  return answer;
 };
 
 const offset = function (cord) {
@@ -177,29 +195,18 @@ const addListener = function (cord, size) {
           selected.find("span")[0].textContent ==
           selected.find("span")[1].textContent
         ) {
-          let answer = [];
-          let root = $(selected[0]);
-          let dest = $(selected[1]);
-          let r_cord = [
-            /(\d+),\d+/.exec(root.data("cord"))[1],
-            /\d+,(\d+)/.exec(root.data("cord"))[1],
-          ].map((x) => Number(x)); // 이거 한자리만 받아오네.. 10개 넘으면 팅김... regex로 대체하자
-          let d_cord = [
-            /(\d+),\d+/.exec(dest.data("cord"))[1],
-            /\d+,(\d+)/.exec(dest.data("cord"))[1],
-          ].map((x) => Number(x));
-
-          dfs(r_cord, d_cord, [r_cord], answer, size);
+          let answer = getPath(selected[0], selected[1], size);
 
           if (answer.length) {
+            // path exists
             $(".contentWrap").append(line(answer[0]));
 
             const tl = gsap.timeline();
-            tl.to("line", 0.01, { stroke: "blue", stagger: 0.01 });
+            tl.to("line", 0.03, { stroke: "blue", stagger: 0.03 });
             tl.to(selected, 0.01, { scale: 0, rotateY: 360 });
             tl.fromTo(
               "line",
-              0.05,
+              0.03,
               { x: -1 },
               {
                 x: 1,
@@ -219,7 +226,7 @@ const addListener = function (cord, size) {
             // no path
             gsap.fromTo(
               selected,
-              0.05,
+              0.03,
               { rotateY: -10 },
               {
                 rotateY: 10,
@@ -300,14 +307,14 @@ const genBoard = function (s_row, s_col) {
   // generate board of size
   buildFrame(s_row, s_col);
   let idxs = choosePair(s_row, s_col);
-  console.log(`idxs:${idxs}`);
+  // console.log(`idxs:${idxs}`);
   for (let i = 0; i < idxs.length; i++) {
     let idx = idxs[i];
-    console.log(
-      `trabelable : ${[...Array([s_row, s_col][0] + 2).keys()]}, ${[
-        ...Array([s_row, s_col][1] + 2).keys(),
-      ]}`
-    );
+    // console.log(
+    //   `trabelable : ${[...Array([s_row, s_col][0] + 2).keys()]}, ${[
+    //     ...Array([s_row, s_col][1] + 2).keys(),
+    //   ]}`
+    // );
     putIcon(idx[0], i);
     putIcon(idx[1], i);
     addListener(idx[0], [s_row, s_col]);
@@ -316,4 +323,64 @@ const genBoard = function (s_row, s_col) {
   gsap.from(".tile", 0.1, { x: -1000, y: -1000, z: 100, stagger: 0.01 });
 };
 
-genBoard(4, 15);
+const getAllPairs = function () {
+  let blocks = $(".block");
+  let pool = new Set(blocks.map((i, e) => e.outerText));
+  let candidates = new Set();
+  for (let text of pool) {
+    let candidate = [];
+    for (let i = 0; i < blocks.length; i++) {
+      if (blocks[i].outerText == text) {
+        candidate.push(blocks[i]);
+      }
+    }
+    candidates.add(candidate);
+  }
+  return [...candidates];
+};
+
+const hint = function (size) {
+  let allPairs = getAllPairs();
+  let atLeastOne = false;
+  for (p of allPairs) {
+    if (getPath(p[0], p[1], size).length) {
+      console.log(p[0]);
+      gsap.fromTo(
+        p[0],
+        0.5,
+        { rotateY: -10 },
+        {
+          rotateY: 10,
+
+          ease: RoughEase.ease.config({
+            strength: 8,
+            points: 20,
+            template: Linear.easeNone,
+            randomize: false,
+          }),
+          clearProps: "x",
+        }
+      );
+      atLeastOne = true;
+      break;
+    }
+  }
+  if (!atLeastOne) {
+    $(".contentWrap").html("");
+    let _size =
+      window.prompt(`더이상 가능한 매칭이 없습니다! 새로운 사이즈를 입력해주세요!
+    ex) 4,15
+    (너무 큰 수는 화면 깨짐)`);
+    genBoard(
+      Number(/(\d+),\d+/.exec(_size)[1]),
+      Number(/\d+,(\d+)/.exec(_size)[1])
+    );
+  }
+};
+
+let size = [4, 15];
+
+genBoard(...size);
+$("#hint>button").on("click", (e) => {
+  hint(size);
+});
