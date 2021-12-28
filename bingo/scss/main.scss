@@ -2,32 +2,38 @@
 //   border: 1px solid red;
 // }
 
-$showSize: 80vh;
+$showW: 90vw;
+$showH: 90vh;
+$blockC: #c5fce7;
 
 svg {
   position: absolute;
   top: 0;
-  width: $showSize;
-  height: $showSize;
+  width: $showW;
+  height: $showH;
   pointer-events: none;
+  user-select: none;
 }
 
 .contentWrap {
   margin: auto;
-  width: $showSize;
-  height: $showSize;
+  width: $showW;
+  height: $showH;
   display: flex;
   position: relative;
   flex-flow: column;
+  user-select: none;
   .row {
     // border: 1px solid blue;
     height: 95%;
     display: flex;
     justify-content: space-evenly;
+    user-select: none;
 
     .sizeFixer {
       width: 100%;
       height: 100%;
+      user-select: none;
     }
 
     .tile {
@@ -36,13 +42,14 @@ svg {
       height: 90%;
       justify-content: center;
       align-items: center;
+      user-select: none;
       &.hide {
         display: none;
       }
       &.block {
-        border: 3px solid rgba(165, 42, 42, 0.89);
-        box-shadow: 1px 1px 3px darken(rgba(165, 42, 42, 0.89), 10);
-        background: linear-gradient(rgb(155, 123, 123));
+        border: 3px solid $blockC;
+        box-shadow: 1px 1px 3px darken($blockC, 10);
+        background: linear-gradient($blockC, #fefefe);
         &:hover {
           transform: scale(101%);
           border: 3px solid rgba(165, 147, 42, 0.89);
@@ -51,10 +58,7 @@ svg {
       }
       &.selected {
         background-color: none;
-        background: linear-gradient(
-          rgba(136, 6, 6, 0.884),
-          rgba(54, 2, 2, 0.856)
-        );
+        background: linear-gradient(rgba(136, 6, 6, 0.884), rgba(54, 2, 2, 0.856));
       }
     }
   }
@@ -68,6 +72,7 @@ svg {
     width: 100%;
     height: 100%;
     background-color: #9b7b7b;
+    user-select: none;
     &:hover {
       background-color: darken($color: #9b7b7b, $amount: 30);
     }

@@ -49,6 +49,29 @@ const iconList = [
   "reorder",
   "note_add",
   "shopping_basket",
+  "security",
+  "view_in_ar",
+  "card_giftcard",
+  "feedback",
+  "work_outline",
+  "timeline",
+  "published_with_changes",
+  "android",
+  "assignment_turned_in",
+  "swap_horiz",
+  "dns",
+  "sync_alt",
+  "book",
+  "flight_takeoff",
+  "stars",
+  "pan_tool",
+  "accessibility",
+  "bug_report",
+  "label",
+  "alarm",
+  "cached",
+  "gavel",
+  "contact_page",
 ];
 
 const select = function () {
@@ -61,22 +84,10 @@ const select = function () {
 };
 
 const match = function (ori_cord, comp_cord) {
-  $(`[data-cord="${ori_cord[0]},${ori_cord[1]}"]`).find("span")[0]
-    .textContent ==
-    $(`[data-cord="${comp_cord[0]},${comp_cord[1]}"]`).find("span")[0]
-      .textContent;
+  $(`[data-cord="${ori_cord[0]},${ori_cord[1]}"]`).find("span")[0].textContent == $(`[data-cord="${comp_cord[0]},${comp_cord[1]}"]`).find("span")[0].textContent;
 };
 
-const dfs = function (
-  r_cord,
-  d_cord,
-  record,
-  answer,
-  size,
-  turns = 0,
-  dirc = [0, 0],
-  debug = 0
-) {
+const dfs = function (r_cord, d_cord, record, answer, size, turns = 0, dirc = [0, 0], debug = 0) {
   // void: assigned at answer[0]
   if (turns < 4) {
     // console.log(" ".repeat(debug) + "=======================");
@@ -102,24 +113,11 @@ const dfs = function (
       ];
       for (let i = 0; i < dircs.length; i++) {
         const _dirc = dircs[i];
-        if (
-          r_cord[0] + _dirc[0] in [...Array(size[0] + 2).keys()] &&
-          r_cord[1] + _dirc[1] in [...Array(size[1] + 2).keys()] &&
-          _dirc.some((v, i, arr) => v + dirc[i])
-        ) {
+        if (r_cord[0] + _dirc[0] in [...Array(size[0] + 2).keys()] && r_cord[1] + _dirc[1] in [...Array(size[1] + 2).keys()] && _dirc.some((v, i, arr) => v + dirc[i])) {
           let _r_cord = r_cord.map((v, i) => v + _dirc[i]);
           // console.log(" ".repeat(debug) + "===in range=== && ===in dirc===");
           // console.log(" ".repeat(debug) + `_r_cord : ${_r_cord}`);
-          dfs(
-            _r_cord,
-            d_cord,
-            record.concat([_r_cord]),
-            answer,
-            size,
-            turns + !dirc.every((v, i) => v == _dirc[i]),
-            _dirc,
-            debug + 1
-          );
+          dfs(_r_cord, d_cord, record.concat([_r_cord]), answer, size, turns + !dirc.every((v, i) => v == _dirc[i]), _dirc, debug + 1);
         }
       }
     }
@@ -131,14 +129,8 @@ const getPath = function (dom1, dom2, size) {
   let answer = [];
   let root = $(dom1);
   let dest = $(dom2);
-  let r_cord = [
-    /(\d+),\d+/.exec(root.data("cord"))[1],
-    /\d+,(\d+)/.exec(root.data("cord"))[1],
-  ].map((x) => Number(x));
-  let d_cord = [
-    /(\d+),\d+/.exec(dest.data("cord"))[1],
-    /\d+,(\d+)/.exec(dest.data("cord"))[1],
-  ].map((x) => Number(x));
+  let r_cord = [/(\d+),\d+/.exec(root.data("cord"))[1], /\d+,(\d+)/.exec(root.data("cord"))[1]].map((x) => Number(x));
+  let d_cord = [/(\d+),\d+/.exec(dest.data("cord"))[1], /\d+,(\d+)/.exec(dest.data("cord"))[1]].map((x) => Number(x));
 
   dfs(r_cord, d_cord, [r_cord], answer, size);
   return answer;
@@ -191,10 +183,7 @@ const addListener = function (cord, size) {
       select.bind(this)();
       let selected = $(".selected");
       if (selected.length == 2) {
-        if (
-          selected.find("span")[0].textContent ==
-          selected.find("span")[1].textContent
-        ) {
+        if (selected.find("span")[0].textContent == selected.find("span")[1].textContent) {
           let answer = getPath(selected[0], selected[1], size);
 
           if (answer.length) {
@@ -202,11 +191,11 @@ const addListener = function (cord, size) {
             $(".contentWrap").append(line(answer[0]));
 
             const tl = gsap.timeline();
-            tl.to("line", 0.03, { stroke: "blue", stagger: 0.03 });
+            tl.to("line", 0.02, { stroke: "blue", stagger: 0.02 });
             tl.to(selected, 0.01, { scale: 0, rotateY: 360 });
             tl.fromTo(
               "line",
-              0.03,
+              0.02,
               { x: -1 },
               {
                 x: 1,
@@ -226,7 +215,7 @@ const addListener = function (cord, size) {
             // no path
             gsap.fromTo(
               selected,
-              0.03,
+              0.02,
               { rotateY: -10 },
               {
                 rotateY: 10,
@@ -245,7 +234,7 @@ const addListener = function (cord, size) {
           // totally wrong
           gsap.fromTo(
             selected,
-            0.05,
+            0.03,
             { rotateX: -15 },
             {
               rotateX: 15,
@@ -315,8 +304,10 @@ const genBoard = function (s_row, s_col) {
     //     ...Array([s_row, s_col][1] + 2).keys(),
     //   ]}`
     // );
-    putIcon(idx[0], i);
-    putIcon(idx[1], i);
+    let iconIdx = Math.floor(Math.random() * s_row * s_col * 0.1);
+    console.log(`iconIdx: ${iconIdx}`);
+    putIcon(idx[0], iconIdx);
+    putIcon(idx[1], iconIdx);
     addListener(idx[0], [s_row, s_col]);
     addListener(idx[1], [s_row, s_col]);
   }
@@ -367,18 +358,14 @@ const hint = function (size) {
   }
   if (!atLeastOne) {
     $(".contentWrap").html("");
-    let _size =
-      window.prompt(`더이상 가능한 매칭이 없습니다! 새로운 사이즈를 입력해주세요!
+    let _size = window.prompt(`더이상 가능한 매칭이 없습니다! 새로운 사이즈를 입력해주세요!
     ex) 4,15
-    (너무 큰 수는 화면 깨짐)`);
-    genBoard(
-      Number(/(\d+),\d+/.exec(_size)[1]),
-      Number(/\d+,(\d+)/.exec(_size)[1])
-    );
+    (짝수면 큰 수도 상관 없음)`);
+    genBoard(Number(/(\d+),\d+/.exec(_size)[1]), Number(/\d+,(\d+)/.exec(_size)[1]));
   }
 };
 
-let size = [4, 15];
+let size = [9, 30];
 
 genBoard(...size);
 $("#hint>button").on("click", (e) => {
