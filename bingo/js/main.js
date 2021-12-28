@@ -74,6 +74,8 @@ const iconList = [
   "contact_page",
 ];
 
+const tl = gsap.timeline();
+
 const select = function () {
   // check more than 2 is selected
   if ($(".selected").length > 1) {
@@ -190,7 +192,6 @@ const addListener = function (cord, size) {
             // path exists
             $(".contentWrap").append(line(answer[0]));
 
-            const tl = gsap.timeline();
             tl.to("line", 0.02, { stroke: "blue", stagger: 0.02 });
             tl.to(selected, 0.01, { scale: 0, rotateY: 360 });
             tl.fromTo(
@@ -213,7 +214,7 @@ const addListener = function (cord, size) {
             selected.removeClass("block");
           } else {
             // no path
-            gsap.fromTo(
+            tl.fromTo(
               selected,
               0.02,
               { rotateY: -10 },
@@ -232,7 +233,7 @@ const addListener = function (cord, size) {
           }
         } else {
           // totally wrong
-          gsap.fromTo(
+          tl.fromTo(
             selected,
             0.03,
             { rotateX: -15 },
@@ -311,7 +312,7 @@ const genBoard = function (s_row, s_col) {
     addListener(idx[0], [s_row, s_col]);
     addListener(idx[1], [s_row, s_col]);
   }
-  gsap.from(".tile", 0.1, { x: -1000, y: -1000, z: 100, stagger: 0.01 });
+  tl.from(".tile", 0.1, { x: -1000, y: -1000, z: 100, stagger: 0.01 });
 };
 
 const getAllPairs = function () {
@@ -336,7 +337,7 @@ const hint = function (size) {
   for (p of allPairs) {
     if (getPath(p[0], p[1], size).length) {
       console.log(p[0]);
-      gsap.fromTo(
+      tl.fromTo(
         p[0],
         0.5,
         { rotateY: -30, y: -30 },
