@@ -191,8 +191,8 @@ const addListener = function (cord, size) {
             $(".contentWrap").append(line(answer[0]));
 
             const tl = gsap.timeline();
-            tl.to("line", 0.02, { stroke: "blue", stagger: 0.02 });
-            tl.to(selected, 0.01, { scale: 0, rotateY: 360 });
+            tl.to("line", 0.02, { stroke: "blue", stagger: 0.01 });
+            tl.to(selected, 0.01, { visibility: "hidden", rotateY: 360 });
             tl.fromTo(
               "line",
               0.02,
@@ -285,7 +285,7 @@ const buildFrame = function (s_row, s_col) {
   for (let row = 0; row < s_row + 2; row++) {
     output += `<div class="row ${row}">`;
     for (let col = 0; col < s_col + 2; col++) {
-      output += `<div class="sizeFixer"><div class="tile" data-cord="${row},${col}"></div></div>`;
+      output += `<div class="tile" data-cord="${row},${col}"></div>`;
     }
     output += `</div>`;
   }
