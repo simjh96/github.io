@@ -339,10 +339,9 @@ const hint = function (size) {
       gsap.fromTo(
         p[0],
         0.5,
-        { rotateY: -10 },
+        { rotateY: -30, y: -30 },
         {
-          rotateY: 10,
-
+          rotateY: 30,
           ease: RoughEase.ease.config({
             strength: 8,
             points: 20,
