@@ -188,10 +188,10 @@ const addListener = function (cord, size) {
 
           if (answer.length) {
             // path exists
-            $(".contentWrap").append(line(answer[0]));
+            $(".row:nth-child(1)").before(line(answer[0]));
 
             const tl = gsap.timeline();
-            tl.to("line", 0.02, { stroke: "blue", stagger: 0.02 });
+            tl.to("line", 10, { stroke: "blue", stagger: 0.02 });
             tl.to(selected, 0.01, { scale: 0, rotateY: 360 });
             tl.fromTo(
               "line",

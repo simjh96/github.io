@@ -6,6 +6,10 @@ $showW: 90vw;
 $showH: 90vh;
 $blockC: #c5fce7;
 
+body {
+  position: relative;
+}
+
 svg {
   position: absolute;
   top: 0;
