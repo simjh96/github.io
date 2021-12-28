@@ -311,7 +311,7 @@ const genBoard = function (s_row, s_col) {
     addListener(idx[0], [s_row, s_col]);
     addListener(idx[1], [s_row, s_col]);
   }
-  gsap.from(".tile", 0.1, { x: -1000, y: -1000, z: 100, stagger: 0.01 });
+  gsap.from(".sizeFixer", 0.1, { x: -1000, y: -1000, z: 100, stagger: 0.01 });
 };
 
 const getAllPairs = function () {
