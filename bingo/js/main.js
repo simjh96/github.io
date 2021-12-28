@@ -365,6 +365,47 @@ const hint = function (size) {
   }
 };
 
+const autoPlay = function (size) {
+  let allPairs = getAllPairs();
+  let atLeastOne = false;
+  let mid = Math.floor(allPairs.length / 2);
+  let mixIdxs = [mid];
+  for (let i = 0; i < allPairs.length - 2; i++) {
+    mid += (-1) ** i * i;
+    let p = allPairs[mid];
+    if (getPath(p[0], p[1], size).length) {
+      // selected 할당한것 처럼 만들고 path 있는 경우 나오는 action 적용
+
+      // console.log(p[0]);
+      // tl.fromTo(
+      //   p[0],
+      //   0.5,
+      //   { rotateY: -30, y: -30 },
+      //   {
+      //     rotateY: 30,
+      //     ease: RoughEase.ease.config({
+      //       strength: 8,
+      //       points: 20,
+      //       template: Linear.easeNone,
+      //       randomize: false,
+      //     }),
+      //     clearProps: "x",
+      //   }
+      // );
+      atLeastOne = true;
+      break;
+    }
+  }
+  if (!atLeastOne) {
+    // 경고창만 띄워... 안보이면 없는거라고, 있을수도 있음(몇개 건너뛰어서)
+    // $(".contentWrap").html("");
+    // let _size = window.prompt(`더이상 가능한 매칭이 없습니다! 새로운 사이즈를 입력해주세요!
+    // ex) 4,15
+    // (짝수면 큰 수도 상관 없음)`);
+    // genBoard(Number(/(\d+),\d+/.exec(_size)[1]), Number(/\d+,(\d+)/.exec(_size)[1]));
+  }
+};
+
 let size = [9, 30];
 
 genBoard(...size);

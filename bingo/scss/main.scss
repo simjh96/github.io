@@ -82,3 +82,18 @@ svg {
     }
   }
 }
+#auto {
+  width: 30vw;
+  height: 5vh;
+  margin: auto;
+  margin-top: 10px;
+  user-select: none;
+  button {
+    width: 100%;
+    height: 100%;
+    background-color: #9b7b7b;
+    &:hover {
+      background-color: darken($color: #9b7b7b, $amount: 30);
+    }
+  }
+}

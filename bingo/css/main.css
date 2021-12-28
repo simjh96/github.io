@@ -116,3 +116,24 @@ svg {
 #hint button:hover {
   background-color: #473636;
 }
+
+#auto {
+  width: 30vw;
+  height: 5vh;
+  margin: auto;
+  margin-top: 10px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+#auto button {
+  width: 100%;
+  height: 100%;
+  background-color: #9b7b7b;
+}
+
+#auto button:hover {
+  background-color: #473636;
+}
