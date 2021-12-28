@@ -29,6 +29,7 @@ svg {
     height: 95%;
     display: flex;
     justify-content: space-evenly;
+    border-radius: 10%;
 
     .sizeFixer {
       width: 100%;
@@ -37,6 +38,7 @@ svg {
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      border-radius: 10%;
     }
 
     .tile {

@@ -38,6 +38,7 @@ svg {
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
+  border-radius: 10%;
 }
 
 .contentWrap .row .sizeFixer {
@@ -53,6 +54,7 @@ svg {
       -ms-flex-align: center;
           align-items: center;
   overflow: hidden;
+  border-radius: 10%;
 }
 
 .contentWrap .row .tile {
