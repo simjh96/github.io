@@ -127,7 +127,7 @@ const dfs = function (r_cord, d_cord, record, answer, size, turns = 0, dirc = [0
 };
 
 const getPath = function (dom1, dom2, size) {
-  // ($('.selected')[0], $('.selected')[1], size) -> dfs path
+  // ($('.selected')[0], $('.selected')[1], size) -> [dfs path] : if no path, return empty list
   let answer = [];
   let root = $(dom1);
   let dest = $(dom2);
@@ -141,8 +141,8 @@ const getPath = function (dom1, dom2, size) {
 const offset = function (cord) {
   // x: left, y: height
   let b = $(`[data-cord="${cord[0]},${cord[1]}"]`)[0];
-  console.log(`chosen cord:${cord}`);
-  console.log(`chosen b:${b}`);
+  // console.log(`chosen cord:${cord}`);
+  // console.log(`chosen b:${b}`);
   return [b.offsetLeft + b.offsetWidth / 2, b.offsetTop + b.offsetHeight / 2];
 };
 
@@ -293,7 +293,7 @@ const buildFrame = function (s_row, s_col) {
   $(".contentWrap").html(output);
 };
 
-const genBoard = function (s_row, s_col) {
+const genBoard = function (s_row, s_col, dupRate = 6) {
   // generate board of size
   buildFrame(s_row, s_col);
   let idxs = choosePair(s_row, s_col);
@@ -305,8 +305,8 @@ const genBoard = function (s_row, s_col) {
     //     ...Array([s_row, s_col][1] + 2).keys(),
     //   ]}`
     // );
-    let iconIdx = Math.floor(Math.random() * s_row * s_col * 0.1);
-    console.log(`iconIdx: ${iconIdx}`);
+    let iconIdx = Math.floor(Math.random() * s_row * s_col * (1 / dupRate));
+    // console.log(`iconIdx: ${iconIdx}`);
     putIcon(idx[0], iconIdx);
     putIcon(idx[1], iconIdx);
     addListener(idx[0], [s_row, s_col]);
@@ -315,28 +315,45 @@ const genBoard = function (s_row, s_col) {
   tl.from(".tile", 0.1, { x: -1000, y: -1000, z: 100, stagger: 0.01 });
 };
 
-const getAllPairs = function () {
+const getAllPairs = function (quedratic = false) {
+  // find all blocks -> add (every | consequtive) 2 pair
   let blocks = $(".block");
   let pool = new Set(blocks.map((i, e) => e.outerText));
-  let candidates = new Set();
-  for (let text of pool) {
-    let candidate = [];
-    for (let i = 0; i < blocks.length; i++) {
-      if (blocks[i].outerText == text) {
-        candidate.push(blocks[i]);
+  let candidates = [];
+
+  if (quedratic) {
+    for (let text of pool) {
+      let candidate = [];
+      for (let i = 0; i < blocks.length; i++) {
+        if (blocks[i].outerText == text) {
+          candidate.push(blocks[i]);
+        }
+      }
+      let combination = candidate.flatMap((v, i, arr) => arr.slice(i + 1).map((w) => [v, w]));
+      candidates = candidates.concat(combination);
+    }
+  } else {
+    for (let text of pool) {
+      for (let i = 0; i < blocks.length; i++) {
+        if (blocks[i].outerText == text) {
+          candidate.push(blocks[i]);
+        }
+        if (candidate.length == 2) {
+          candidates.push(candidate);
+          candidate = [];
+        }
       }
     }
-    candidates.add(candidate);
   }
-  return [...candidates];
+  return candidates;
 };
 
 const hint = function (size) {
-  let allPairs = getAllPairs();
+  let allPairs = getAllPairs((quedratic = true));
   let atLeastOne = false;
   for (p of allPairs) {
     if (getPath(p[0], p[1], size).length) {
-      console.log(p[0]);
+      // console.log(p[0]);
       tl.fromTo(
         p[0],
         0.5,
@@ -366,49 +383,57 @@ const hint = function (size) {
 };
 
 const autoPlay = function (size) {
-  let allPairs = getAllPairs();
+  let allPairs = getAllPairs((quedratic = true));
   let atLeastOne = false;
-  let mid = Math.floor(allPairs.length / 2);
-  let mixIdxs = [mid];
-  for (let i = 0; i < allPairs.length - 2; i++) {
-    mid += (-1) ** i * i;
-    let p = allPairs[mid];
-    if (getPath(p[0], p[1], size).length) {
-      // selected 할당한것 처럼 만들고 path 있는 경우 나오는 action 적용
 
-      // console.log(p[0]);
-      // tl.fromTo(
-      //   p[0],
-      //   0.5,
-      //   { rotateY: -30, y: -30 },
-      //   {
-      //     rotateY: 30,
-      //     ease: RoughEase.ease.config({
-      //       strength: 8,
-      //       points: 20,
-      //       template: Linear.easeNone,
-      //       randomize: false,
-      //     }),
-      //     clearProps: "x",
-      //   }
-      // );
+  for (let i = 0; i < allPairs.length; i++) {
+    let randomIndex = Math.floor(Math.random() * allPairs.length);
+    let p = allPairs[randomIndex];
+    let path = getPath(p[0], p[1], size);
+    if (path.length) {
+      // path exists
+      $(".contentWrap").append(line(path[0]));
+      tl.to("line", 0.01, { stroke: "blue", stagger: 0.01 });
+      tl.to(p, 0.01, { scale: 0, rotateY: 360 });
+      tl.fromTo(
+        "line",
+        0.01,
+        { x: -1 },
+        {
+          x: 1,
+          ease: RoughEase.ease.config({
+            strength: 8,
+            points: 20,
+            template: Linear.easeNone,
+            randomize: false,
+          }),
+          clearProps: "x",
+          onComplete: () => $("line").remove(),
+        }
+      );
+      $(p).removeClass("block");
+
       atLeastOne = true;
       break;
     }
   }
   if (!atLeastOne) {
-    // 경고창만 띄워... 안보이면 없는거라고, 있을수도 있음(몇개 건너뛰어서)
-    // $(".contentWrap").html("");
-    // let _size = window.prompt(`더이상 가능한 매칭이 없습니다! 새로운 사이즈를 입력해주세요!
-    // ex) 4,15
-    // (짝수면 큰 수도 상관 없음)`);
-    // genBoard(Number(/(\d+),\d+/.exec(_size)[1]), Number(/\d+,(\d+)/.exec(_size)[1]));
+    window.alert("더이상 조합이 없습니다 ㅠㅠ");
   }
 };
 
 let size = [9, 30];
 
-genBoard(...size);
+genBoard(...size, (dupRate = 5));
 $("#hint>button").on("click", (e) => {
   hint(size);
+});
+$("#auto>button").on("click", (e) => {
+  autoPlay(size);
+});
+$(document).on("keyup", (e) => {
+  console.log(e);
+  if (e.code == "Space") {
+    autoPlay(size);
+  }
 });
