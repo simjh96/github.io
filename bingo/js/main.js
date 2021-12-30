@@ -392,6 +392,7 @@ const autoPlay = function (size) {
     let path = getPath(p[0], p[1], size);
     if (path.length) {
       // path exists
+      console.log(path);
       $(".contentWrap").append(line(path[0]));
       tl.to("line", 0.01, { stroke: "blue", stagger: 0.01 });
       tl.to(p, 0.01, { scale: 0, rotateY: 360 });
@@ -418,7 +419,7 @@ const autoPlay = function (size) {
     }
   }
   if (!atLeastOne) {
-    window.alert("더이상 조합이 없습니다 ㅠㅠ");
+    window.alert("한번 더 누르면 나올수도...");
   }
 };
 
@@ -432,7 +433,6 @@ $("#auto>button").on("click", (e) => {
   autoPlay(size);
 });
 $(document).on("keyup", (e) => {
-  console.log(e);
   if (e.code == "Space") {
     autoPlay(size);
   }
