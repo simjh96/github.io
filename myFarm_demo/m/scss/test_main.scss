@@ -18,6 +18,33 @@ body {
   opacity: 0;
 }
 
+// chat
+.chat {
+  position: fixed;
+  right: 20px;
+  bottom: 30px;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  box-shadow: 5px 5px 5px black;
+  background-image: url("../images/main/icon/icon_kakao.png");
+  background-size: cover;
+  z-index: 5;
+}
+// shop
+.shop {
+  position: fixed;
+  right: 20px;
+  bottom: 110px;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  box-shadow: 5px 5px 5px black;
+  background-image: url("../images/main/icon/icon_mall.png");
+  background-size: cover;
+  z-index: 5;
+}
+
 .slider_menu {
   background-color: $white-color;
   position: fixed;
