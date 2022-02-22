@@ -1,0 +1,453 @@
+@import "vars";
+
+// init font
+body {
+  font-size: $medium-size;
+  font-family: "Noto Sans KR";
+  color: darkslategray;
+}
+
+// init bg color
+.body_container {
+  background-color: $bg-color;
+  width: 100vw;
+}
+
+// hide
+.hide {
+  opacity: 0;
+}
+
+.slider_menu {
+  background-color: $white-color;
+  position: fixed;
+  height: 100%;
+  width: 100vw;
+  top: 60px;
+  left: 100%;
+  transition: 0.5s ease;
+  z-index: 3;
+  &.on {
+    left: 0;
+    + #gnb ul {
+      top: 0;
+    }
+  }
+
+  ul {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+
+#gnb {
+  background-color: $bg-color;
+  position: fixed;
+  height: 100px;
+  width: 100vw;
+  z-index: 2;
+
+  ul {
+    position: relative;
+    top: 40%;
+    box-sizing: border-box;
+    height: 60%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.5s ease;
+
+    .hamburger {
+      width: $gnb-icon-size;
+      height: $gnb-icon-size;
+      position: relative;
+      margin-left: 20px;
+      span {
+        display: block;
+        height: 2px;
+        background-color: $main-color;
+        position: absolute;
+        left: 10px;
+        transition: all 0.25s ease;
+        &:nth-child(1) {
+          top: 14px;
+          width: 10px;
+        }
+        &:nth-child(2) {
+          top: 24px;
+          width: 30px;
+        }
+        &:nth-child(3) {
+          top: 34px;
+          width: 20px;
+        }
+      }
+      &.on {
+        span {
+          &:nth-child(1) {
+            transform: rotate(-45deg);
+            top: 24px;
+            width: 30px;
+          }
+          &:nth-child(2) {
+            left: 100px;
+            opacity: 0;
+          }
+          &:nth-child(3) {
+            transform: rotate(45deg);
+            top: 24px;
+            width: 30px;
+          }
+        }
+      }
+    }
+    .logo {
+      width: $gnb-icon-size;
+      height: $gnb-icon-size;
+      position: relative;
+      .imgBox {
+        width: 100%;
+        height: 100%;
+        background-image: url("../images/ci/logo_myfarm.png");
+        background-size: cover;
+      }
+    }
+    .settings {
+      display: flex;
+      align-items: flex-end;
+      width: $gnb-icon-size;
+      height: $gnb-icon-size;
+      position: relative;
+      margin-right: 20px;
+      span {
+        width: 2px;
+        background-color: $main-color;
+        position: relative;
+        bottom: 10px;
+        transition: all 0.25s ease;
+        &:nth-child(1) {
+          left: 10px;
+          height: 10px;
+        }
+        &:nth-child(2) {
+          left: 20px;
+          height: 30px;
+        }
+        &:nth-child(3) {
+          left: 30px;
+          height: 20px;
+        }
+      }
+      &.on {
+        span {
+          &:nth-child(1) {
+            transform: rotate(45deg);
+            height: 30px;
+            left: 23px;
+          }
+          &:nth-child(2) {
+            left: 100px;
+            opacity: 0;
+            height: 30px;
+          }
+          &:nth-child(3) {
+            transform: rotate(-45deg);
+            height: 30px;
+            left: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.myItems {
+  background-color: lighten($color: $main-color, $amount: 50);
+  box-sizing: border-box;
+  padding-top: 150px;
+  width: 100%;
+  height: 500px;
+  // overflow: hidden;
+
+  .titleBox {
+    display: flex;
+    height: 10%;
+    margin-bottom: 30px;
+    h1 {
+      margin-left: 20px;
+      font-family: "Jua";
+      font-size: xx-large;
+      color: black;
+    }
+  }
+  .swiper {
+    height: 100%;
+    margin-left: 40px;
+    .swiper-wrapper {
+      .swiper-slide {
+        .imgBox {
+          position: relative;
+          border-radius: 8px;
+          background-size: cover;
+          background-repeat: no-repeat;
+          height: 60%;
+          box-shadow: 15px 15px 0px darken($color: $main-color, $amount: 10);
+
+          .txtBox {
+            position: absolute;
+            width: 100%;
+            bottom: 0px;
+            padding-bottom: 10px;
+            background-color: $main-color;
+            border-radius: 0 0 8px 8px;
+
+            p {
+              margin: 6px;
+              text-align: center;
+              color: $white-color;
+              font-family: "Jua";
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // .listBox {
+  //   height: 90%;
+  //   ul.list {
+  //     height: 100%;
+  //     .imgBox {
+  //       width: 30%;
+  //       height: 30%;
+  //       background-image: url("../images/contents/fruits/fruit01.jpg");
+  //     }
+  //   }
+  // }
+}
+
+.options {
+  box-sizing: border-box;
+  padding-top: 30px;
+  width: 100%;
+  height: 450px;
+  // overflow: hidden;
+
+  .titleBox {
+    display: flex;
+    height: 10%;
+    margin-bottom: 30px;
+    h1 {
+      margin-left: 20px;
+      font-family: "Jua";
+      font-size: xx-large;
+      color: black;
+    }
+  }
+  .swiper {
+    height: 100%;
+    margin-left: 40px;
+    .swiper-wrapper {
+      .swiper-slide:nth-child(2n-1) {
+        .imgBox {
+          position: relative;
+          border-radius: 8px;
+          background-size: contain;
+          background-repeat: no-repeat;
+          height: 70%;
+
+          &::after {
+            z-index: -1;
+            display: block;
+            content: "";
+            position: absolute;
+
+            bottom: 0px;
+            left: 0px;
+
+            height: 100%;
+            width: 100%;
+
+            border-radius: 10px;
+            background-image: url("../images/layout/pattern/leaf03.png");
+            background-size: cover;
+          }
+
+          .txtBox {
+            position: absolute;
+            width: 100%;
+            bottom: 0px;
+            padding-bottom: 10px;
+            background-color: $main-color;
+            border-radius: 0 0 8px 8px;
+
+            p {
+              margin: 6px;
+              text-align: center;
+              color: $white-color;
+              font-family: "Jua";
+            }
+          }
+        }
+      }
+      .swiper-slide:nth-child(2n) {
+        .imgBox {
+          position: relative;
+          border-radius: 8px;
+          background-size: contain;
+          background-repeat: no-repeat;
+          height: 70%;
+          &::after {
+            z-index: -1;
+            display: block;
+            content: "";
+            position: absolute;
+
+            bottom: 0px;
+            left: 0px;
+
+            height: 100%;
+            width: 100%;
+
+            border-radius: 10px;
+            background-image: url("../images/layout/pattern/leaf01.png");
+            background-size: cover;
+          }
+
+          .txtBox {
+            position: absolute;
+            width: 100%;
+            bottom: 0px;
+            padding-bottom: 10px;
+            background-color: $main-color;
+            border-radius: 0 0 8px 8px;
+
+            p {
+              margin: 6px;
+              text-align: center;
+              color: $white-color;
+              font-family: "Jua";
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.neighbors {
+  background-color: lighten($color: $main-color, $amount: 50);
+  box-sizing: border-box;
+  padding-top: 40px;
+  width: 100%;
+  height: 500px;
+  // overflow: hidden;
+
+  .titleBox {
+    display: flex;
+    height: 10%;
+    margin-bottom: 30px;
+    h1 {
+      margin-left: 20px;
+      font-family: "Jua";
+      font-size: xx-large;
+      color: black;
+    }
+  }
+  .swiper {
+    height: 100%;
+    margin-left: 40px;
+    .swiper-wrapper {
+      .swiper-slide {
+        .imgBox {
+          position: relative;
+          border-radius: 8px;
+          background-size: cover;
+          background-repeat: no-repeat;
+          height: 60%;
+          box-shadow: 15px 15px 0px darken($color: $main-color, $amount: 10);
+
+          .txtBox {
+            position: absolute;
+            width: 100%;
+            bottom: 0px;
+            padding-bottom: 10px;
+            background-color: $main-color;
+            border-radius: 0 0 8px 8px;
+
+            p {
+              margin: 6px;
+              text-align: center;
+              color: $white-color;
+              font-family: "Jua";
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#footer {
+  background-color: $gray-color;
+  color: $white-color;
+
+  .utilMenu {
+    // built in function  darken(color,10)
+    // transparentize(color, 0.5)
+    border-bottom: 1px solid transparentize($white-color, 0.5);
+    ul {
+      display: flex;
+      justify-content: center;
+      li {
+        &:first-child a:before {
+          display: none;
+        }
+        a {
+          display: block;
+          padding: 20px 10px;
+          position: relative;
+          font-size: $small-size;
+          &:before {
+            background-color: $white-color;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+          }
+        }
+      }
+    }
+  }
+  .addressBox {
+    padding: 30px 0;
+    font-size: $small-size;
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+      img {
+        width: 80px;
+      }
+    }
+    .address {
+      line-height: 1.5;
+      text-align: center;
+      .copyright {
+        margin-top: 30px;
+      }
+    }
+    .tel {
+      text-align: center;
+      margin-top: 30px;
+      strong {
+        display: block;
+        font-size: $medium-size;
+        font-weight: 600;
+        margin-top: 5px;
+      }
+    }
+  }
+}

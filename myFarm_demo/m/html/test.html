@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR&display=swap"/>
+
+    <!-- styleSheet -->
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/swiper-bundle.css" />
+    <link rel="stylesheet" href="../css/test_main.css" />
+
+    <!-- javascript -->
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/swiper-bundle.min.js"></script>
+    <script src="../js/test_main.js" defer></script>
+
+    <!-- Doc -->
+    <title>마이농장에 오신것을 환영합니다!</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../images/ci/logo_leaf.png"
+    />
+  </head>
+  <body>
+    <!-- .body_container>(((.slider_menu>ul>li{menu$}*5)+(nav#gnb>(ul>(li.hamburger>span*3)+(li.logo>.imgBox)+(li.settings>span*3))))+(.myItems>(.titleBox>h1{내 작물들})+(.swiper>.swiper-wrapper>(.swiper-slide>.imgBox[style={background-image:url("../images/contents/vegi/vegi0$.jpg")}]>.txtBox>p{상품$: 상세 설명 1}+p{상품$: 상세 설명 2})*9))+(.options>(.titleBox>h1{나무 장터})+(.swiper>.swiper-wrapper>(.swiper-slide>.imgBox[style={background-image:url("../images/contents/tree/tree0$.png")}]>.txtBox>p{상품$: 상세 설명 1}+p{상품$: 상세 설명 2})*8))+(.neighbors>(.titleBox>h1{이웃 소식})+(.swiper>.swiper-wrapper>(.swiper-slide>.imgBox[style={background-image:url("../images/contents/farm/farm0$.jpg")}]>.txtBox>p{이웃농장$ 상세 설명 1}+p{이웃농장$ 상세 설명 2})*6))+footer.footer) -->
+    <div class="body_container">
+      <div class="slider_menu">
+        <ul>
+          <li>menu1</li>
+          <li>menu2</li>
+          <li>menu3</li>
+          <li>menu4</li>
+          <li>menu5</li>
+        </ul>
+      </div>
+      <nav id="gnb">
+        <ul>
+          <li class="hamburger"><span></span><span></span><span></span></li>
+          <li class="logo">
+            <div class="imgBox"></div>
+          </li>
+          <li class="settings"><span></span><span></span><span></span></li>
+        </ul>
+      </nav>
+      <div class="myItems">
+        <div class="titleBox">
+          <h1>내 작물들</h1>
+        </div>
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/vegi/vegi01.jpg")>
+                <div class="txtBox">
+                  <p>상품1: 상세 설명 1</p>
+                  <p>상품1: 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/vegi/vegi02.jpg")>
+                <div class="txtBox">
+                  <p>상품2: 상세 설명 1</p>
+                  <p>상품2: 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/vegi/vegi03.jpg")>
+                <div class="txtBox">
+                  <p>상품3: 상세 설명 1</p>
+                  <p>상품3: 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/vegi/vegi04.jpg")>
+                <div class="txtBox">
+                  <p>상품4: 상세 설명 1</p>
+                  <p>상품4: 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/vegi/vegi05.jpg")>
+                <div class="txtBox">
+                  <p>상품5: 상세 설명 1</p>
+                  <p>상품5: 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/vegi/vegi06.jpg")>
+                <div class="txtBox">
+                  <p>상품6: 상세 설명 1</p>
+                  <p>상품6: 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/vegi/vegi07.jpg")>
+                <div class="txtBox">
+                  <p>상품7: 상세 설명 1</p>
+                  <p>상품7: 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/vegi/vegi08.jpg")>
+                <div class="txtBox">
+                  <p>상품8: 상세 설명 1</p>
+                  <p>상품8: 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/vegi/vegi09.jpg")>
+                <div class="txtBox">
+                  <p>상품9: 상세 설명 1</p>
+                  <p>상품9: 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="options">
+        <div class="titleBox">
+          <h1>나무 장터</h1>
+        </div>
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/tree/tree01.png")>
+                <div class="txtBox">
+                  <p>상품1: 상세 설명 1</p>
+                  <p>상품1: 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/tree/tree02.png")>
+                <div class="txtBox">
+                  <p>상품2: 상세 설명 1</p>
+                  <p>상품2: 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/tree/tree03.png")>
+                <div class="txtBox">
+                  <p>상품3: 상세 설명 1</p>
+                  <p>상품3: 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/tree/tree04.png")>
+                <div class="txtBox">
+                  <p>상품4: 상세 설명 1</p>
+                  <p>상품4: 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/tree/tree05.png")>
+                <div class="txtBox">
+                  <p>상품5: 상세 설명 1</p>
+                  <p>상품5: 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/tree/tree06.png")>
+                <div class="txtBox">
+                  <p>상품6: 상세 설명 1</p>
+                  <p>상품6: 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/tree/tree07.png")>
+                <div class="txtBox">
+                  <p>상품7: 상세 설명 1</p>
+                  <p>상품7: 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/tree/tree08.png")>
+                <div class="txtBox">
+                  <p>상품8: 상세 설명 1</p>
+                  <p>상품8: 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="neighbors">
+        <div class="titleBox">
+          <h1>이웃 소식</h1>
+        </div>
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/farm/farm01.jpg")>
+                <div class="txtBox">
+                  <p>이웃농장1 상세 설명 1</p>
+                  <p>이웃농장1 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/farm/farm02.jpg")>
+                <div class="txtBox">
+                  <p>이웃농장2 상세 설명 1</p>
+                  <p>이웃농장2 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/farm/farm03.jpg")>
+                <div class="txtBox">
+                  <p>이웃농장3 상세 설명 1</p>
+                  <p>이웃농장3 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/farm/farm04.jpg")>
+                <div class="txtBox">
+                  <p>이웃농장4 상세 설명 1</p>
+                  <p>이웃농장4 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/farm/farm05.jpg")>
+                <div class="txtBox">
+                  <p>이웃농장5 상세 설명 1</p>
+                  <p>이웃농장5 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="imgBox" style=background-image:url("../images/contents/farm/farm06.jpg")>
+                <div class="txtBox">
+                  <p>이웃농장6 상세 설명 1</p>
+                  <p>이웃농장6 상세 설명 2</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer"></footer>
+    </div>
+
+    <footer id="footer">
+      <div class="utilMenu">
+        <ul>
+          <li><a href="">이용약관</a></li>
+          <li><a href="">개인정보보호정책</a></li>
+          <li><a href="">사이트맵</a></li>
+          <li><a href="">온라인견적문의</a></li>
+        </ul>
+      </div>
+      <div class="addressBox">
+        <div class="shop">
+          <div class="imgBox"></div>
+        </div>
+        <div class="address">
+          <p>
+            주소 : 서울 강따라로 01길 01 (10층) <br />
+            대표전화 : 070-1234-5678 <br />
+            이메일 : ladybug@hanmail.net <br />
+            사업자번호 : 123-45-67890
+          </p>
+          <p class="copyright">MockUp Project; No Copyright ⓒ reserved</p>
+        </div>
+        <div class="tel">
+          고객만족센터
+          <div class="imgBox"></div>
+          <strong><a href="tel:070-1234-5678">070-1234-5678</a></strong>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

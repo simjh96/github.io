@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hitop</title>
+    <script src="https://cdn.jsdelivr.net/npm/mobile-detect@1.4.5/mobile-detect.min.js"></script>
+  </head>
+  <body>
+    <script>
+      const md = new MobileDetect(window.navigator.userAgent);
+      console.log(md.mobile());
+      if (md.mobile()) {
+        location.href = "m/html";
+      } else {
+        alert("모바일로만 확인 가능한 페이지입니다, 또는 /m/html을 사용해보세요");
+      }
+    </script>
+  </body>
+</html>
